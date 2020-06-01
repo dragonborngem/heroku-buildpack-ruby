@@ -63,19 +63,3 @@ describe "Rails 5" do
     end
   end
 end
-
-describe "Rails 5.1" do
-  it "works with webpacker + yarn (js friends)" do
-    buildpacks = [
-      :default,
-      "https://github.com/sharpstone/force_absolute_paths_buildpack"
-    ]
-    Hatchet::Runner.new("rails51_webpacker", buildpacks: buildpacks).deploy do |app, heroku|
-      expect(app.output).to include("Installing yarn")
-      expect(app.output).to include("yarn install")
-
-      expect(app.run("which -a node")).to match("/app/bin/node")
-      expect(app.run("which -a yarn")).to match("/app/vendor/yarn-")
-    end
-  end
-end
